@@ -88,7 +88,7 @@ front-end/
 Clone o repositório e entre na pasta:
 
 ```bash
-git clone https://github.com/luhdias-png/front-end.git
+https://github.com/luhdias-png/teste-front-end.git
 cd front-end
 npm install
 ```
