@@ -1,0 +1,2008 @@
+/* =========================================================
+   SESSÃO 1: VARIÁVEIS GLOBAIS, RESET E BASE
+   ========================================================= */
+:root {
+  --primary-yellow: #F7C200;
+  --primary-yellow-hover: #E0B000;
+  --royal-blue: #3442B0;
+  --royal-blue-hover: #283493;
+  --dark-text: #2A2A2A;
+  --muted-gray: #9F9F9F;
+  --light-bg: #F6F5F2;
+  --card-border: #E8E8E8;
+  --dark-navy: #2A275C;
+  --page-gutter: clamp(16px, 4vw, 60px);
+  --content-width: 1280px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: var(--dark-text);
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.header-topbar,
+.main-header,
+.category-nav,
+.newsletter-section,
+.main-footer {
+  .container {
+    width: min(100%, var(--content-width));
+  }
+}
+
+.categories-section,
+.brands-section,
+.main-footer .footer-bottom {
+  width: min(100%, var(--content-width));
+}
+
+/* =========================================================
+   SESSÃO 2: HEADER (TOPBAR E CABEÇALHO PRINCIPAL)
+   ========================================================= */
+.header-topbar {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #F0F0F0;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9F9F9F;
+  font-style: normal;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 119px;
+  }
+
+  .topbar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span {
+      color: var(--royal-blue);
+      font-weight: 600;
+    }
+
+    svg {
+      color: #9F9F9F;
+    }
+  }
+}
+
+.main-header {
+  border-bottom: 1px solid #F0F0F0;
+  padding: 10px;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    text-decoration: none;
+
+    .logo-text span {
+      color: var(--primary-yellow);
+    }
+  }
+
+  .search-box {
+    flex: 1;
+    max-width: 630px;
+    position: relative;
+
+    input {
+      width: 100%;
+      padding: 12px 45px 12px 20px;
+      background-color: #F6F5F2;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--royal-blue);
+        background-color: #FFF;
+        box-shadow: 0 0 0 3px rgba(52, 66, 176, 0.1);
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9F9F9F;
+
+      &:hover {
+        color: var(--royal-blue);
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9F9F9F;
+      transition: color 0.2s;
+      position: relative;
+
+      &:hover {
+        color: var(--royal-blue);
+      }
+    }
+  }
+}
+
+/* --- MELHORIA DA TOP BAR EM MOBILE --- */
+@media (max-width: 768px) {
+  .header-topbar {
+    .topbar-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      justify-content: flex-start;
+      padding: 6px 15px;
+      gap: 20px;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .topbar-item {
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 3: NAVEGAÇÃO E MENU MOBILE (NAVBAR)
+   ========================================================= */
+.category-nav {
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+  }
+
+  .nav-item {
+    padding: 12px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #9F9F9F;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover,
+    &.active,
+    &.highlight {
+      color: var(--royal-blue);
+    }
+  }
+}
+
+/* --- ESTILOS DO MENU DE HAMBÚRGUER --- */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #3F3F40;
+  padding: 5px;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/* Gaveta do menu mobile */
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 280px;
+  height: 100vh;
+  background: #FFFFFF;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: left 0.3s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+
+  &.open {
+    left: 0;
+  }
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #F0F0F0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 18px;
+    color: var(--royal-blue, #070716);
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+}
+
+.close-menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #3F3F40;
+  padding: 5px;
+}
+
+.mobile-menu-content {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+
+    li {
+      padding: 12px 0;
+      border-bottom: 1px solid #F0F0F0;
+
+      a {
+        text-decoration: none;
+        color: #3F3F40;
+        font-weight: 500;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 1px solid #F0F0F0;
+  padding-top: 20px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #3F3F40;
+    font-weight: 500;
+  }
+}
+
+/* Ativação do botão de hambúrguer e ajuste */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-topbar {
+    display: none;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .main-header-container { // Se esta classe existir no HTML original
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+  }
+}
+
+/* =========================================================
+   SESSÃO 4: HERO BANNER
+   ========================================================= */
+.hero-banner {
+  width: 100%;
+
+  .banner-card {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0) 100%), url("assets/black_friday.jpg") center/cover;
+    width: 100%;
+    height: 390px;
+    padding: 15px calc(50vw - 630px);
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1px;
+
+    h1 {
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 50px;
+      max-width: 600px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-yellow);
+    }
+
+    span {
+      font-weight: 400;
+      color: #fff;
+    }
+
+    .btn-hero {
+      margin-top: 35px;
+      background-color: var(--primary-yellow);
+      color: #271C47;
+      top: 206px;
+      height: 50px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 7px 49px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--primary-yellow-hover);
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 5: SEÇÃO DE CATEGORIAS (ÍCONES REDONDOS)
+   ========================================================= */
+.categories-section {
+  max-width: 1280px;
+  margin: 35px auto;
+  padding: 0 60px;
+
+  .grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    min-width: 110px;
+
+    .icon-box {
+      width: 128px;
+      height: 128px;
+      background-color: #f4f4f4ff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+      color: #4E4E4E;
+
+      svg {
+        width: 61px;
+        height: 61px;
+      }
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #4E4E4E;
+      text-align: center;
+    }
+
+    &:hover,
+    &.active {
+      .icon-box {
+        background-color: #FFFFFF;
+        box-shadow: 0 8px 20px rgba(52, 66, 176, 0.15);
+        color: var(--royal-blue);
+        border: 1px solid rgba(52, 66, 176, 0.2);
+      }
+
+      span {
+        color: var(--royal-blue);
+      }
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 6: CABEÇALHOS DE SEÇÃO E TABS DE PRODUTOS
+   ========================================================= */
+.section-header {
+  text-align: center;
+  margin-top: 10vh;
+
+  .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    .line {
+      height: 1px;
+      background-color: #dedede;
+      flex: 1;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--royal-blue);
+      transform: translateY(5px);
+    }
+  }
+
+  .ver-todos-link {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 2px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .nav-tabs {
+    display: inline-flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 18px;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .tab-btn {
+      width: 13.385rem;
+      height: 40px;
+      padding: 12px 58px;
+      background: #FFFFFF;
+      border: none;
+      border-right: 1px solid #BDBDBD;
+      font-size: 16px;
+      font-weight: 400;
+      color: #3F3F40;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &.active,
+      &:hover {
+        color: var(--royal-blue);
+        font-size: 16px;
+        font-weight: 700;
+        background-color: #F4F5FB;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .section-header {
+    margin-top: 8vh;
+
+    .title-wrapper {
+      gap: 15px;
+      padding: 0 16px;
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+
+    .nav-tabs-wrapper {
+      padding: 0 16px;
+    }
+
+    .nav-tabs {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    margin-top: 6vh;
+
+    .title-wrapper {
+      gap: 10px;
+      padding: 0 12px;
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    .nav-tabs-wrapper {
+      padding: 0 12px;
+    }
+
+    .nav-tabs .tab-btn {
+      height: 48px;
+      min-width: 13.385rem;
+      padding: 12px 24px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+
+    .nav-tabs-wrapper {
+      width: 100%;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 16px 12px 16px;
+      box-sizing: border-box;
+      margin-top: 15px;
+      scrollbar-width: auto;
+      scrollbar-color: #F71963 #E0E0E0;
+
+      &::-webkit-scrollbar {
+        height: 8px !important;
+        display: block !important;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #E0E0E0;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #F71963;
+        border-radius: 4px;
+      }
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: flex-start !important;
+      width: max-content !important;
+      white-space: nowrap;
+      margin-top: 0;
+      border: none;
+      border-radius: 0;
+
+      .tab-btn {
+        flex-shrink: 0 !important;
+        border-right: 1px solid #BDBDBD;
+      }
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 7: CARROSSEL DE PRODUTOS E CARDS
+   ========================================================= */
+.product-shelf {
+  width: 1364px;
+  max-width: 100%;
+  height: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+
+  .shelf-wrapper {
+    padding: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #FFF;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    color: var(--royal-blue);
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: var(--royal-blue);
+      color: white;
+    }
+
+    &.prev {
+      left: -14px;
+    }
+
+    &.next {
+      right: -14px;
+    }
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: 100%;
+  }
+
+  .product-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .img-container {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .prod-title {
+      font-size: 15px;
+      font-weight: 300;
+      color: #3F3F40;
+      margin-bottom: 10px;
+      min-height: 40px;
+    }
+
+    .old-price {
+      font-size: 16px;
+      font-weight: 400;
+      color: #808080;
+      text-decoration: line-through;
+    }
+
+    .current-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: #3F3F40;
+      margin: 2px 0;
+    }
+
+    .installments {
+      font-size: 12px;
+      color: #3F3F40;
+      margin-bottom: 6px;
+    }
+
+    .free-shipping {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--royal-blue);
+      margin-bottom: 14px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 11px 0;
+      background-color: var(--royal-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--royal-blue-hover);
+      }
+    }
+  }
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.products-track {
+  display: flex;
+  width: 100%;
+  gap: 18px;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-card {
+  flex: 0 0 calc((100% - 54px) / 4);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .product-shelf .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-shelf .products-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .shelf-wrapper,
+  .carousel-viewport {
+    width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #BDBDBD #F4F5FB;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+      display: block !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #F4F5FB;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #BDBDBD;
+      border-radius: 4px;
+    }
+  }
+
+  .products-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    padding-bottom: 12px;
+  }
+
+  .product-card.carousel-card {
+    flex: 0 0 calc((100vw - 48px) / 1) !important;
+    max-width: none;
+    scroll-snap-align: start;
+  }
+
+  .nav-arrow {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   SESSÃO 8: BANNERS PARCEIROS
+   ========================================================= */
+.partner-banners {
+  width: 100%;
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+
+  .partner-card {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%), url("assets/parceiro.jpg") center/cover;
+    border-radius: 16px;
+    padding: 35px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 350px;
+    width: 100%;
+    box-sizing: border-box;
+
+    h3 {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 18px;
+      max-width: 220px;
+      line-height: 1.4;
+    }
+
+    .btn-partner {
+      align-self: flex-start;
+      background-color: var(--primary-yellow);
+      color: #000;
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 16px;
+      transition: background-color 0.2s, transform 0.2s;
+      letter-spacing: 0.08em;
+
+      &:hover {
+        background-color: var(--primary-yellow-hover);
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-banners {
+    display: flex;
+    justify-content: flex-start;
+    grid-template-columns: none;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px 14px 16px;
+    scrollbar-width: auto;
+    scrollbar-color: var(--muted-gray) #E0E0E0;
+
+    &::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #E0E0E0;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #2e2e2e;
+      border-radius: 4px;
+    }
+
+    .partner-card {
+      flex: 0 0 85% !important;
+      min-width: 380px;
+      margin-right: 16px;
+      height: 300px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      h3 {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 14px;
+        max-width: 180px;
+      }
+
+      .btn-partner {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 9: MARCAS (BRANDS)
+   ========================================================= */
+.brands-section {
+  max-width: 1280px;
+  margin: 50px auto;
+  padding: 0 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--royal-blue);
+    margin-bottom: 25px;
+  }
+
+  .brands-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 25px 15px;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > div:hover {
+      box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.25);
+      border-color: var(--primary-yellow);
+    }
+  }
+
+  .brand-circle {
+    width: 211px;
+    height: 211px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 87px 47px;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+    border: 1px solid #F0F0F0;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .brand-logot {
+    width: 117px;
+    height: 34.76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* =========================================================
+   SESSÃO 10: NEWSLETTER
+   ========================================================= */
+.newsletter-section {
+  background-color: #271C47;
+  color: white;
+  padding: 40px 0;
+  margin-top: 50px;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .news-text {
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #CCCCCC;
+    }
+  }
+
+  .news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    max-width: 620px;
+
+    .inputs-row {
+      display: flex;
+      gap: 10px;
+
+      input {
+        flex: 1;
+        padding: 12px 24px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 13px;
+      }
+
+      button {
+        background-color: var(--primary-yellow);
+        color: #000;
+        font-weight: 600;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 14px;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: var(--primary-yellow-hover);
+        }
+      }
+    }
+
+    .terms-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #CCCCCC;
+
+      input[type=checkbox] {
+        accent-color: var(--primary-yellow);
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .newsletter-section .container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .newsletter-section .news-form .inputs-row {
+    flex-direction: column;
+  }
+}
+
+/* =========================================================
+   SESSÃO 11: FOOTER
+   ========================================================= */
+.main-footer {
+  background-color: #F8F8F8;
+  padding: 50px 0 20px;
+  border-top: 1px solid #E5E5E5;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 100px;
+  }
+
+  .footer-about {
+    border-right: 1px solid #DEDEDE;
+    padding-right: 60px;
+
+    p {
+      font-size: 14px;
+      color: #4E4E4E;
+      margin: 14px 0 18px;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 22px;
+
+      i {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.2s;
+        font-size: 24px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.2);
+          border-color: var(--royal-blue);
+          color: var(--royal-blue);
+        }
+      }
+    }
+  }
+
+  .footer-col {
+    h4 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #222222;
+      opacity: 0.71;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: 8px;
+
+        a {
+          font-size: 14px;
+          color: #222222;
+          opacity: 0.71;
+          text-decoration: none;
+          transition: color 0.2s;
+
+          &:hover {
+            color: var(--royal-blue);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 35px auto 0;
+    padding: 18px 20px 0;
+    border-top: 1px solid #E5E5E5;
+    text-align: center;
+    font-size: 11px;
+    color: #9F9F9F;
+  }
+}
+
+@media (max-width: 900px) {
+  .main-footer {
+    .container {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-about {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main-footer .container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* =========================================================
+   SESSÃO 12: MODAL DE COMPRA
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+  background: white;
+  border-radius: 6px;
+  width: 769px;
+  height: 299px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.54);
+
+  .close-btn {
+    position: absolute;
+    top: 2px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 35px;
+    color: #707070;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--royal-blue);
+    }
+  }
+
+  .modal-img {
+    width: 247px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .modal-info {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+      color: #3F3F40;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3F3F40;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 10px;
+      font-weight: 500;
+      font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #9F9F9F;
+      max-width: 290px;
+      margin-bottom: 5px;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+
+    .more-details {
+      font-family: "Work Sans", sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.05em;
+      margin-bottom: 30px;
+      color: #3442B5;
+      cursor: pointer;
+    }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+
+      .qty-picker {
+        width: 110px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        border: 1px solid #041E50;
+        border-radius: 4px;
+
+        button {
+          background: none;
+          border: none;
+          font-size: 20px;
+          font-weight: 600;
+          color: #271C47;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #F0F0F0;
+          }
+        }
+
+        span {
+          padding: 0 8px;
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+
+      .btn-modal-buy {
+        width: 188px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--primary-yellow);
+        color: #000;
+        border: none;
+        padding: 11px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.5s;
+
+        &:hover {
+          background-color: var(--primary-yellow-hover);
+        }
+      }
+    }
+  }
+}
+
+#qty-back {
+  color: #9F9F9F;
+}
+
+@media (max-width: 650px) {
+  .modal-card {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   SESSÃO 13: RESPONSIVO GERAL (MEDIA QUERIES)
+   ========================================================= */
+
+/* Large screens */
+@media (max-width: 1280px) {
+  .header-topbar,
+  .category-nav,
+  .main-header,
+  .categories-section,
+  .main-footer {
+    .container {
+      padding-inline: var(--page-gutter);
+    }
+  }
+
+  .main-header .container {
+    gap: 24px;
+  }
+
+  .hero-banner .banner-card {
+    padding-inline: var(--page-gutter);
+  }
+
+  .product-shelf {
+    width: 100%;
+
+    .shelf-wrapper {
+      padding-inline: var(--page-gutter);
+    }
+  }
+
+  .main-footer .container {
+    gap: 48px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .header-topbar .container {
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .main-header {
+    padding: 12px var(--page-gutter);
+
+    .container {
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      order: 3;
+      flex-basis: 100%;
+      max-width: none;
+    }
+  }
+
+  .category-nav .container {
+    justify-content: flex-start;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .category-nav .nav-item {
+    flex: 0 0 auto;
+  }
+
+  .hero-banner .banner-card {
+    min-height: 360px;
+    height: auto;
+    padding-block: 48px;
+
+    h1 {
+      font-size: clamp(36px, 5vw, 48px);
+      line-height: 1.08;
+    }
+
+    p {
+      font-size: clamp(24px, 4vw, 32px);
+    }
+  }
+
+  .categories-section {
+    .grid {
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    .cat-card {
+      flex: 0 0 110px;
+    }
+  }
+
+  .section-header {
+    margin-top: 64px;
+
+    .title-wrapper {
+      gap: 20px;
+    }
+
+    .nav-tabs {
+      max-width: calc(100% - 32px);
+
+      .tab-btn {
+        width: clamp(120px, 22vw, 214px);
+        padding-inline: 20px;
+      }
+    }
+  }
+
+  .product-shelf {
+    height: auto;
+
+    .shelf-wrapper {
+      padding-block: 20px;
+    }
+
+    .nav-arrow {
+      &.prev {
+        left: 4px;
+      }
+
+      &.next {
+        right: 4px;
+      }
+    }
+  }
+
+  .carousel-card {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+
+  .partner-banners .partner-card {
+    min-height: 320px;
+    height: auto;
+  }
+
+  .brands-section .brands-grid {
+    justify-content: flex-start;
+  }
+
+  .newsletter-section {
+    .container {
+      align-items: stretch;
+    }
+
+    .news-form {
+      max-width: none;
+      width: 100%;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header-topbar {
+    font-size: 11px;
+
+    .container {
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-inline: 16px;
+    }
+
+    .topbar-item {
+      justify-content: center;
+    }
+  }
+
+  .main-header {
+    padding-inline: 16px;
+
+    .container {
+      gap: 16px;
+    }
+
+    .header-actions {
+      gap: 14px;
+    }
+
+    .search-box input {
+      padding-block: 11px;
+    }
+  }
+
+  .category-nav .container {
+    padding-inline: 16px;
+    gap: 20px;
+  }
+
+  .hero-banner .banner-card {
+    min-height: 330px;
+    padding: 40px 20px;
+
+    h1 {
+      max-width: 100%;
+      font-size: clamp(30px, 8vw, 40px);
+    }
+
+    p {
+      font-size: clamp(21px, 6vw, 28px);
+    }
+
+    .btn-hero {
+      margin-top: 24px;
+      width: auto;
+      max-width: 100%;
+      padding-inline: 32px;
+    }
+  }
+
+  .categories-section {
+    margin-block: 28px;
+    padding-inline: 16px;
+
+    .cat-card .icon-box {
+      width: 100px;
+      height: 100px;
+
+      svg {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .section-header {
+    margin-top: 48px;
+
+    .title-wrapper {
+      padding-inline: 16px;
+      gap: 12px;
+
+      h2 {
+        font-size: clamp(22px, 6vw, 30px);
+        white-space: nowrap;
+      }
+    }
+
+    .nav-tabs {
+      width: calc(100% - 32px);
+      display: flex;
+
+      .tab-btn {
+        min-width: 0;
+        width: 50%;
+        height: 42px;
+        padding-inline: 8px;
+        font-size: 13px;
+
+        &.active,
+        &:hover {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .product-shelf {
+    padding-inline: 0;
+
+    .shelf-wrapper {
+      padding-inline: 16px;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card {
+      padding: 16px;
+
+      .img-container {
+        height: 160px;
+      }
+    }
+
+    .nav-arrow {
+      width: 30px;
+      height: 30px;
+
+      &.prev {
+        left: 2px;
+      }
+
+      &.next {
+        right: 2px;
+      }
+    }
+  }
+
+  .carousel-card {
+    flex-basis: 100%;
+  }
+
+  .partner-banners {
+    grid-template-columns: 1fr;
+    margin-block: 32px;
+    padding-inline: 16px;
+
+    .partner-card {
+      min-height: 300px;
+      padding: 28px;
+
+      h3 {
+        font-size: clamp(30px, 8vw, 40px);
+      }
+    }
+  }
+
+  .brands-section {
+    margin-block: 40px;
+    padding-inline: 16px;
+
+    .brand-circle {
+      width: 170px;
+      height: 170px;
+      padding: 30px;
+    }
+
+    .brand-logot {
+      width: 105px;
+    }
+  }
+
+  .newsletter-section {
+    padding-block: 32px;
+
+    .container {
+      padding-inline: 16px;
+      gap: 24px;
+    }
+
+    .news-form {
+      .inputs-row {
+        flex-direction: column;
+
+        input,
+        button {
+          width: 100%;
+        }
+      }
+
+      .terms-row {
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .main-footer {
+    padding-top: 36px;
+
+    .container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding-inline: 16px;
+    }
+
+    .footer-about p {
+      max-width: none;
+    }
+
+    .footer-bottom {
+      padding-inline: 16px;
+    }
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .header-topbar .container {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .main-header {
+    .container {
+      justify-content: center;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .header-actions {
+      margin-left: auto;
+    }
+  }
+
+  .hero-banner .banner-card {
+    min-height: 300px;
+    padding: 32px 16px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    .btn-hero {
+      width: 100%;
+    }
+  }
+
+  .categories-section .cat-card {
+    flex-basis: 96px;
+
+    .icon-box {
+      width: 88px;
+      height: 88px;
+    }
+
+    span {
+      font-size: 13px;
+    }
+  }
+
+  .section-header .title-wrapper {
+    justify-content: center;
+
+    .line {
+      display: none;
+    }
+  }
+
+  .product-shelf {
+    .shelf-wrapper {
+      padding-inline: 12px;
+    }
+
+    .nav-arrow {
+      display: none;
+    }
+  }
+
+  .partner-banners .partner-card {
+    min-height: 280px;
+    padding: 22px;
+
+    p {
+      max-width: none;
+    }
+  }
+
+  .brands-section {
+    .brands-grid {
+      gap: 14px;
+    }
+
+    .brand-circle {
+      width: 145px;
+      height: 145px;
+    }
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-card {
+    width: min(100%, 420px);
+    height: auto;
+    min-height: 0;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    padding: 44px 20px 24px;
+    flex-direction: column;
+    gap: 20px;
+
+    .close-btn {
+      top: 8px;
+      right: 12px;
+      font-size: 30px;
+    }
+
+    .modal-img {
+      width: min(180px, 70vw);
+      height: 150px;
+      justify-content: center;
+    }
+
+    .modal-info {
+      width: 100%;
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .description {
+        max-width: none;
+      }
+
+      .qty-row {
+        width: 100%;
+        flex-wrap: wrap;
+
+        .qty-picker {
+          flex: 0 0 110px;
+        }
+
+        .btn-modal-buy {
+          flex: 1 1 180px;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .main-header .header-actions {
+    gap: 8px;
+  }
+
+  .section-header .nav-tabs .tab-btn {
+    font-size: 12px;
+
+    &.active,
+    &:hover {
+      font-size: 12px;
+    }
+  }
+
+  .modal-card .modal-info .qty-row {
+    flex-direction: column;
+    align-items: stretch;
+
+    .qty-picker,
+    .btn-modal-buy {
+      width: 100%;
+      flex: none;
+    }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
