@@ -54,16 +54,24 @@ export default function App() {
         setActiveCategory={setActiveCategory} 
       />
 
-      {loading ? (
-        <p style={{ textAlign: "center", padding: "50px" }}>A carregar produtos...</p>
-      ) : error ? (
-        <p style={{ textAlign: "center", padding: "50px", color: "red" }}>Erro ao carregar os produtos. Tente novamente mais tarde.</p>
-      ) : (
-        <ProdutosComTabs 
-          products={products} 
-          onOpenProduct={handleOpenModal} 
-        />
-      )}
+{loading && (
+  <p role="status">
+    Carregando produtos...
+  </p>
+)}
+
+{error && (
+  <p role="alert">
+    Erro ao carregar os produtos. Tente novamente mais tarde.
+  </p>
+)}
+
+{!loading && !error && (
+  <ProdutosComTabs
+    products={products}
+    onOpenProduct={handleOpenModal}
+  />
+)}
 
       <Parceiros/>
       {loading ? (

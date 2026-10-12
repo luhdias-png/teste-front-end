@@ -44,18 +44,20 @@ export function ProdutosComTabs({
           <div className="line"></div>
         </div>
 
-        <div className="nav-tabs-wrapper">
-          <div className="nav-tabs">
-            {tabsList.map((tab, idx) => (
-              <button
-                key={idx}
-                className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab)}>
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
+<div className="nav-tabs-wrapper">
+  <div className="nav-tabs">
+    {tabsList.map((tab) => (
+      <button
+        key={tab}
+        type="button"
+        className={`tab-btn ${activeTab === tab ? "active" : ""}`}
+        onClick={() => setActiveTab(tab)}
+      >
+        {tab}
+      </button>
+    ))}
+  </div>
+</div>
       </section>
 
       <section className="product-shelf">
