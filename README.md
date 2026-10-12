@@ -82,7 +82,8 @@ front-end/
 ├── tsconfig.app.json
 ├── tsconfig.node.json
 └── eslint.config.js
-````
+```
+
 ## Instalação e execução
 
 Clone o repositório e entre na pasta:
@@ -139,18 +140,40 @@ O ponto de entrada `src/main.tsx` importa `./index.css`. Portanto, o navegador r
 
 ## Como os produtos são carregados
 
-O hook `useProducts`, em `src/services/useProducts.ts`, define o tipo `Product` com os campos:
+O hook `useProducts`, em `src/services/useProducts.ts`, define o tipo `Product` e é responsável por buscar os produtos da API Econverse.
 
-- `productName: string`
-- `photo: string`
-- `price: number`
-- `descriptionShort: string`
-
-A URL configurada para consulta é:
+**Endpoint original da API:**
 
 `https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json`
 
-O hook usa `fetch` dentro de `useEffect`. Se a resposta HTTP não for bem-sucedida, lança um erro. Aceita tanto um objeto com a propriedade `products` quanto um array JSON diretamente. Se a requisição falhar — incluindo falhas de rede/CORS — ou o formato não for reconhecido, registra um aviso no console e usa `mockProducts`, uma lista local de oito produtos. Ao final da tentativa, define `loading` como `false`. O hook retorna `{ products, loading, error }`; no caminho de fallback, `error` é explicitamente definido como `false`, de modo que a interface possa mostrar os produtos locais em vez da mensagem de erro.
+O formato esperado da resposta é um objeto JSON com a propriedade `products`, contendo a lista de produtos. Cada produto utiliza os seguintes campos:
+
+- `productName: string`: nome do produto.
+- `photo: string`: URL da imagem do produto.
+- `price: number`: preço do produto.
+- `descriptionShort: string`: descrição resumida do produto.
+
+### Requisições à API
+
+Durante o desenvolvimento local, a aplicação utiliza o caminho `/api/produtos.json` para consultar os produtos. O proxy configurado no Vite encaminha essa requisição para o endpoint original da API Econverse.
+
+Essa configuração evita que a aplicação precise consultar diretamente o domínio externo pelo navegador durante o desenvolvimento, ajudando a contornar possíveis restrições de CORS.
+
+### Tratamento de erros
+
+A aplicação verifica se a resposta HTTP foi bem-sucedida. Se a requisição falhar ou os dados não puderem ser processados corretamente, o estado de erro é ativado e a lista de produtos é limpa.
+
+A aplicação não utiliza mais `mockProducts` como alternativa à API. Dessa forma, os produtos exibidos dependem do carregamento bem-sucedido dos dados remotos.
+
+### Como verificar a API localmente
+
+Após iniciar o servidor de desenvolvimento, acesse:
+
+`http://localhost:5173/api/produtos.json`
+
+A resposta deve apresentar os dados retornados pela API. Caso ocorra uma falha, verifique a conectividade com o endpoint original, a configuração do proxy em `vite.config.ts` e possíveis restrições de acesso.
+
+**Observação:** o proxy configurado no Vite é destinado ao desenvolvimento local. Ele não fica automaticamente disponível no ambiente de produção. Para publicar a aplicação, é necessário garantir que a API permita requisições da origem publicada ou disponibilizar um encaminhamento equivalente no ambiente de hospedagem.
 
 ## Organização da aplicação
 
@@ -159,13 +182,14 @@ Arquivos de entrada identificados:
 - `index.html`: documento HTML, título `Econverse`, elemento `#root` e entrada `/src/main.tsx`. Também referencia as fontes Google Fonts Poppins e Work Sans e a folha Font Awesome 4.7.0 por CDN.
 - `src/main.tsx`: importa `src/index.css`, importa `App` e monta a aplicação dentro de `React.StrictMode`.
 - `src/App.tsx`: compõe as seções da página, chama `useProducts`, controla a categoria ativa, o produto selecionado, a quantidade no modal e a contagem do carrinho.
-- `src/services/useProducts.ts`: tipo `Product`, busca remota e dados locais de fallback.
+- `src/services/useProducts.ts`: tipo `Product`, busca remota e tratamento de erros.
 - `src/components/`: componentes da interface.
 - `src/assets/`: inclui o recurso de logo importado por `App.tsx` como `./assets/Logo.png`.
 - `src/index.scss`: fonte SCSS dos estilos.
 - `src/index.css`: CSS importado pela entrada da aplicação e destino da compilação Sass.
 - `public/`: diretório de recursos públicos do projeto.
-- `vite.config.ts`, `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json` e `eslint.config.js`: arquivos de configuração presentes na raiz.
+- `vite.config.ts`: configuração do Vite, incluindo o proxy utilizado no desenvolvimento local para encaminhar as requisições de produtos à API Econverse.
+- `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json` e `eslint.config.js`: arquivos de configuração presentes na raiz.
 
 ### Componentes utilizados por `App.tsx`
 
@@ -194,11 +218,12 @@ Não há script `test` declarado em `package.json`. Assim, este projeto não doc
 
 ## Configurações
 
-- `vite.config.ts`: configuração do Vite.
+- `vite.config.ts`: configuração do Vite e do proxy utilizado no desenvolvimento local.
 - `tsconfig.json`, `tsconfig.app.json` e `tsconfig.node.json`: configurações do TypeScript usadas pelo projeto; o script de build chama `tsc -b`.
 - `eslint.config.js`: configuração do ESLint; o script de lint executa `eslint .`.
 
 Para detalhes específicos de opções internas desses arquivos de configuração, consulte diretamente os arquivos versionados no repositório.
-'''
+
 ## Autor
+
 Desenvolvido por André Lucas Dias Lima.
